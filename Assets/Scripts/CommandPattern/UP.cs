@@ -6,7 +6,6 @@ using UnityEngine;
 [Serializable]
 public class UP : Move
 {
-    public int abc;
 
     public override void Execute()
     {
@@ -14,10 +13,4 @@ public class UP : Move
     }
 
 
-}
-
-[Serializable]
-public class upTest
-{
-    public int a;
 }

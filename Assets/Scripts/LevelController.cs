@@ -22,7 +22,7 @@ public class LevelController : MonoBehaviour
 
     public ToDoGridController toDoGridController;
     public PlayerGridController playerGridController;
-    public PlayerExecutableContainer executableContainer;
+    public ExecutableCommandContainer executableContainer;
 
     public GameOverPanel gameOverPanel;
 
