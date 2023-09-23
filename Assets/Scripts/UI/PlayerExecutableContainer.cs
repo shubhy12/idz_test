@@ -21,7 +21,7 @@ public class PlayerExecutableContainer : MonoBehaviour
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].id = i;
-            LevelController.Instance.playerGridController.playerMoveSequences.Add(new MoveType());
+            LevelController.Instance.playerGridController.playerMoveSequences.Add(null);
         }
     }
 
@@ -32,11 +32,11 @@ public class PlayerExecutableContainer : MonoBehaviour
         slot.currentDrag = newDragCommand;
         newDragCommand.transform.position = newDragCommand.startPosition = slot.transform.position;
         newDragCommand.dragImage.raycastTarget = true;
-        LevelController.Instance.playerGridController.playerMoveSequences[slot.id] = draggableCommand.GetComponent<CommandObj>().moveType;
+        LevelController.Instance.playerGridController.playerMoveSequences[slot.id] = draggableCommand.GetComponent<Move>();
     }
     public void DeleteCommandFromSequence(Drop parentSlot, Drag draggableCommand)
     {
-        LevelController.Instance.playerGridController.playerMoveSequences[parentSlot.id] = MoveType.NONE;
+        LevelController.Instance.playerGridController.playerMoveSequences[parentSlot.id] = draggableCommand.GetComponent<Move>();
         parentSlot.currentDrag = null;
         Destroy(draggableCommand.gameObject);
 

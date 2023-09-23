@@ -41,7 +41,7 @@ public class CommanPattern : MonoBehaviour
 }
 
 
-public abstract class Command
+public abstract class Command : MonoBehaviour
 {
 
     //Move and maybe save command
@@ -51,14 +51,6 @@ public abstract class Command
 [Serializable]
 public class Move : Command
 {
-    public MoveType moveType;
-    internal GridController grid;
-
-    public Move(MoveType _moveType, GridController _grid)
-    {
-        moveType = _moveType;
-        grid = _grid;
-    }
 
     public override void Execute()
     {
@@ -66,61 +58,7 @@ public class Move : Command
     }
     public void DrawLine(int x, int y)
     {
-        grid.DrawLine(x, y);
+        LevelController.Instance.playerGridController.DrawLine(x, y);
     }
 
 }
-
-public class UP : Move
-{
-    public UP(MoveType _moveType, GridController _grid) : base(_moveType, _grid)
-    {
-    }
-
-    public override void Execute()
-    {
-        DrawLine(0, -1);
-    }
-
-
-}
-public class RIGHT : Move
-{
-    public RIGHT(MoveType _moveType, GridController _grid) : base(_moveType, _grid)
-    {
-    }
-
-    public override void Execute()
-    {
-        DrawLine(1, 0);
-
-    }
-
-}
-public class DOWN : Move
-{
-    public DOWN(MoveType _moveType, GridController _grid) : base(_moveType, _grid)
-    {
-    }
-
-    public override void Execute()
-    {
-        DrawLine(0, 1);
-
-    }
-
-}
-public class LEFT : Move
-{
-    public LEFT(MoveType _moveType, GridController _grid) : base(_moveType, _grid)
-    {
-    }
-
-    public override void Execute()
-    {
-        DrawLine(-1, 0);
-
-    }
-
-}
-

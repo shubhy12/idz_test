@@ -24,6 +24,8 @@ public class LevelController : MonoBehaviour
     public PlayerGridController playerGridController;
     public PlayerExecutableContainer executableContainer;
 
+    public GameOverPanel gameOverPanel;
+
     public bool IsGameOver { get; private set; }
 
     public int startX;
@@ -36,23 +38,24 @@ public class LevelController : MonoBehaviour
     void Awake()
     {
         _instance = this;
-        toDoGridController.Init(startX, startY);
-        playerGridController.Init(startX, startY);
+        // toDoGridController.Init(startX, startY);
+        // playerGridController.Init(startX, startY);
+        playerGridController.myLine.pencil.transform.position = playerGridController.GetPoint(startX, startY).position;
     }
 
     public bool isWon()
     {
-        bool _isWon = true;
-        for (int i = 0; i < toDoGridController.toDoMoveSequence.Count; i++)
+        if (toDoGridController.drawPath.Count != playerGridController.drawPath.Count) return false;   //path count not match
+        for (int i = 0; i < toDoGridController.drawPath.Count; i++)
         {
-            if (toDoGridController.toDoMoveSequence[i] != playerGridController.playerMoveSequences[i])
+            Debug.Log("i " + i + " todo " + toDoGridController.drawPath[i].gameObject.name + " player " + playerGridController.drawPath[i].gameObject.name);
+            if (!toDoGridController.drawPath[i].anchoredPosition.Equals(playerGridController.drawPath[i].anchoredPosition))
             {
-                _isWon = false;
-                break;
+                return false;
             }
 
         }
-        return _isWon;
+        return true;
 
     }
 
@@ -60,15 +63,7 @@ public class LevelController : MonoBehaviour
     {
         Debug.Log("GameOver!\n---------------------");
         IsGameOver = true;
-        if (_isWon)
-        {
-            Debug.Log("Level Cleared!");
-        }
-        else
-        {
-            Debug.Log("Level Failed!");
-
-        }
+        gameOverPanel.ShowGameOver(_isWon);
     }
 
 

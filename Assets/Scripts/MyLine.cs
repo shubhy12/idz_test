@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal;
@@ -8,6 +9,9 @@ public class MyLine : MonoBehaviour
 {
     public Sprite lineImage;
     public float lineWidth = 0.1f;
+    public Image pencil;
+    public float pencilMoveSmoothness = 1.0f;
+    public float pencilMoveSpeed = 1.0f;
     public List<GameObject> lines = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
@@ -56,5 +60,20 @@ public class MyLine : MonoBehaviour
                 }
         }
         lines.Clear();
+    }
+
+    internal IEnumerator MovePencil(Vector3 from, Vector3 to)
+    {
+        float t = 0;
+        WaitForSeconds forSeconds = new WaitForSeconds(pencilMoveSmoothness);
+        while (!(pencil.transform.position == to))
+        {
+            t += pencilMoveSmoothness;
+            Vector3 lerpPos = Vector3.Lerp(from, to, t * pencilMoveSpeed);
+            pencil.transform.position = lerpPos;
+            yield return forSeconds;
+
+        }
+        pencil.transform.position = to;
     }
 }
