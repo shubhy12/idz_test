@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DOWN : Move
 {
-
     public override void Execute()
     {
         DrawLine(0, 1);

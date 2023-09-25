@@ -17,7 +17,6 @@ public class DraggableComponent : MonoBehaviour, IDragHandler, IBeginDragHandler
     }
 
 
-
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
         dragImage.raycastTarget = false;
@@ -27,14 +26,9 @@ public class DraggableComponent : MonoBehaviour, IDragHandler, IBeginDragHandler
         transform.position = eventData.position;
     }
 
-
     public virtual void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("On end drag Eventdata " + eventData);
-
         transform.position = startPosition;
         dragImage.raycastTarget = true;
-
-
     }
 }

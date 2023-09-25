@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.Search;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
@@ -27,6 +23,8 @@ public class LevelController : MonoBehaviour
     public GameOverPanel gameOverPanel;
 
     public bool IsGameOver { get; private set; }
+
+    public int drawStepWaitingTimeMillies = 1000;
 
     public int startX;
     public int startY;

@@ -7,11 +7,8 @@ using UnityEngine.UI;
 public class SimpleDrag : DraggableComponent
 {
 
-
-
     public override void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("On end drag Eventdata " + eventData);
         if (transform.parent.CompareTag("Slot"))    //if inside slot
         {
             if (!eventData.pointerEnter.Equals(transform.parent.gameObject))        //if not drop at current slot i.e. drop outside current slot
@@ -23,8 +20,5 @@ public class SimpleDrag : DraggableComponent
 
         transform.position = startPosition;
         dragImage.raycastTarget = true;
-
-
-
     }
 }

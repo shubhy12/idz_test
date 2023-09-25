@@ -2,23 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class ToDoGridController : GridController
 {
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     [ContextMenu("Set Sequence")]
-    private void SetSequence()
+    public void SetSequence()
     {
         if (drawPath.Count == 0)
         {
@@ -50,23 +40,7 @@ public class ToDoGridController : GridController
             prevPoint = drawPath[i].anchoredPosition;
 
         }
-        // for (int i = 0; i < toDoMoveSequence.Count; i++)
-        // {
-        //     if (toDoMoveSequence[i] != null)
-        //     {
-        //         toDoMoveSequence[i].Execute();
-        //         executedCommands.Add(toDoMoveSequence[i]);
-        //     }
-        //     else
-        //     {
-        //         Debug.Log("Wrong Sequence Set");
-        //         executedCommands.Clear();
-        //         myLine.Reset();
-        //         break;
-
-        //     }
-        // }
     }
-
-
 }
+
+

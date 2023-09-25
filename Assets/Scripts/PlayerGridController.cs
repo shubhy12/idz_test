@@ -29,7 +29,12 @@ public class PlayerGridController : GridController
             }
             playerMoveSequences[i].Execute();
             executedCommands.Add(playerMoveSequences[i]);
-            await Task.Delay(1000);
+            int waitSeconds = levelController.drawStepWaitingTimeMillies;
+            if (playerMoveSequences[i] is NestedMove)
+            {
+                waitSeconds *= playerMoveSequences[i].GetMove<NestedMove>().loopingVal;
+            }
+            await Task.Delay(waitSeconds);
         }
 
         levelController.Gameover(levelController.isWon());

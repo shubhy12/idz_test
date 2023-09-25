@@ -8,10 +8,6 @@ public class GameOverPanel : MonoBehaviour
 {
     public TextMeshProUGUI heading;
 
-    private void OnEnable()
-    {
-
-    }
     public void ShowGameOver(bool won)
     {
         gameObject.SetActive(true);

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RIGHT : Move
 {
-
     public override void Execute()
     {
         DrawLine(1, 0);
