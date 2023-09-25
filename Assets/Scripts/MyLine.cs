@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,18 +8,11 @@ public class MyLine : MonoBehaviour
 {
     public Sprite lineImage;
     public float lineWidth = 0.1f;
+    public Image pencil;
+    public float pencilMoveSmoothness = 1.0f;
+    public float pencilMoveSpeed = 1.0f;
     public List<GameObject> lines = new List<GameObject>();
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void MakeLine(Vector2 from, Vector2 to, Color col)
     {
         GameObject NewObj = new GameObject();
@@ -38,7 +31,8 @@ public class MyLine : MonoBehaviour
         rect.localPosition = (a + b) / 2;
         Vector3 dif = a - b;
         rect.sizeDelta = new Vector3(dif.magnitude, lineWidth);
-        rect.rotation = Quaternion.Euler(new Vector3(0, 0, 180 * Mathf.Atan(dif.y / dif.x) / Mathf.PI));
+        float tanDiff = dif.x != 0 ? dif.y / dif.x : Mathf.Infinity;
+        rect.rotation = Quaternion.Euler(new Vector3(0, 0, 180 * Mathf.Atan(tanDiff) / Mathf.PI));
 
         lines.Add(NewObj);
     }
@@ -56,5 +50,19 @@ public class MyLine : MonoBehaviour
                 }
         }
         lines.Clear();
+    }
+
+    internal IEnumerator MovePencil(Vector3 from, Vector3 to)
+    {
+        float t = 0;
+        WaitForSeconds forSeconds = new WaitForSeconds(pencilMoveSmoothness);
+        while (!(pencil.transform.position == to))
+        {
+            t += pencilMoveSmoothness;
+            Vector3 lerpPos = Vector3.Lerp(from, to, t * pencilMoveSpeed);
+            pencil.transform.position = lerpPos;
+            yield return forSeconds;
+        }
+        pencil.transform.position = to;
     }
 }
